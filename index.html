@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xat Yozish</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Xat Yozish</h1>
+        <textarea id="message" placeholder="Xatingizni shu yerga yozing..."></textarea>
+        <button onclick="generateQR()">QR Kod Yaratish</button>
+        <div id="qrcode"></div>
+    </div>
+    <script>
+        function generateQR() {
+            let message = document.getElementById("message").value;
+            if (message.trim() === "") {
+                alert("Iltimos, xat yozing!");
+                return;
+            }
+            let encodedMessage = encodeURIComponent(message);
+            let url = window.location.origin + "/read.html?msg=" + encodedMessage;
+            document.getElementById("qrcode").innerHTML = "";
+            new QRCode(document.getElementById("qrcode"), url);
+        }
+    </script>
+</body>
+</html>
