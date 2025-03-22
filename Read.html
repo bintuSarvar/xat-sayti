@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xatni O‘qish</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="letter" class="paper">
+            <p id="message-text">Xat ochilmoqda...</p>
+        </div>
+        <button id="burn-btn">Xatni Yo‘q qilish</button>
+    </div>
+
+    <script>
+        window.onload = function () {
+            let params = new URLSearchParams(window.location.search);
+            let message = params.get("msg");
+            if (message) {
+                document.getElementById("message-text").textContent = decodeURIComponent(message);
+            }
+        };
+
+        document.getElementById("burn-btn").addEventListener("click", function () {
+            let paper = document.getElementById("letter");
+            paper.classList.add("burning");
+            setTimeout(() => { paper.remove(); }, 3000);
+        });
+    </script>
+</body>
+</html>
